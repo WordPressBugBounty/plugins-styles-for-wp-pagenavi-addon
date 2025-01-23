@@ -1,4 +1,6 @@
-jQuery( document ).ready(function($) {
+( function($) {
+
+	"use strict";
 
 	if( sfwppaAdminjs.new_ui == 1 ) {
 		$('.sfwppa-color-box').wpColorPicker();
@@ -16,4 +18,4 @@ jQuery( document ).ready(function($) {
 			jQuery(document).mousedown( function() { jQuery(colorPicker).hide(); });
 		});
 	}
-});
+})(jQuery);

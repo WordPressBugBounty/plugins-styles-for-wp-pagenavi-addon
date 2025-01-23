@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <div class="wrap">
 
-	<h2><?php _e( 'Styles for WP Pagenavi Addon - Features', 'styles-for-wp-pagenavi-addon' ); ?></h2><br />
+	<h2><?php esc_html_e( 'Styles for WP Pagenavi Addon - Features', 'styles-for-wp-pagenavi-addon' ); ?></h2><br />
 
 	<style>
 		.wpos-plugin-pricing-table thead th h2{font-weight: 400; font-size: 2.4em; line-height:normal; margin:0px; color: #2ECC71;}

@@ -29,7 +29,6 @@ class Sfwppa_Admin {
 	/**
 	 * Function to register admin menus
 	 * 
-	 * @package Styles For WP Pagenavi Addon
 	 * @since 1.0.0
 	 */
 	function sfwppa_register_menu() {
@@ -39,7 +38,6 @@ class Sfwppa_Admin {
 	/**
 	 * Function to register admin menus
 	 * 
-	 * @package Styles For WP Pagenavi Addon
 	 * @since 1.0.0
 	 */
 	function sfwppa_register_extra_menu() {		
@@ -49,7 +47,6 @@ class Sfwppa_Admin {
 	/**
 	 * Function to handle the setting page html
 	 * 
-	 * @package Styles For WP Pagenavi Addon
 	 * @since 1.0.0
 	 */
 	function sfwppa_main_page() {
@@ -59,7 +56,6 @@ class Sfwppa_Admin {
 	/**
 	 * Upgrade to PRO Vs Free 
 	 * 
-	 * @package Styles For WP Pagenavi Addon
 	 * @since 1.0.0
 	 */
 	function sfwppa_premium_page() {
@@ -69,10 +65,8 @@ class Sfwppa_Admin {
 	/**
 	 * Function register setings
 	 * 
-	 * @package Styles For WP Pagenavi Addon
 	 * @since 1.0.0
 	 */
-	
 	function sfwppa_register_settings(){
 		register_setting( 'sfwppa_plugin_options', 'sfwppa_options' );
 	}	

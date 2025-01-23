@@ -10,30 +10,48 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-function sfwppa_default_settings() {
-	
-	global $sfwppa_options;
+/**
+ * Get plugin default settings
+ * 
+ * @since 1.0.0
+ */
+function sfwppa_get_default_settings() {
 
-	$sfwppa_options = array(
-							'menu_arr'			=>	'',
-							'font_size'			=>	'',
-							'font_color'		=>	'',
-							'border_color'		=>	'',
-							'active_bg_color'	=>	'',
-							'hover_bg_color'	=>	'',
-							'active_text_color'	=>	'',
-							'hover_text_color'	=>	'',
-						);
-	$default_options = apply_filters('sfwppa_options_default_values', $sfwppa_options );
-	
-	// Update default options
-	update_option( 'sfwppa_options', $default_options );
-	
-	// Overwrite global variable when option is update
-	$sfwppa_options = sfwppa_get_settings();
+	$sfwppa_options = apply_filters( 'sfwppa_options_default_values', array(
+											'menu_arr'			=>	'',
+											'font_size'			=>	'',
+											'font_color'		=>	'',
+											'border_color'		=>	'',
+											'active_bg_color'	=>	'',
+											'hover_bg_color'	=>	'',
+											'active_text_color'	=>	'',
+											'hover_text_color'	=>	'',
+	) );
+
+	return $sfwppa_options;
 }
 
-//Handles to return all settings value
+/**
+ * Update default settings
+ * 
+ * @since 1.0.0
+ */
+function sfwppa_set_default_settings() {
+
+	global $sfwppa_options;
+
+	$sfwppa_options = sfwppa_get_default_settings();
+
+	// Update default options
+	update_option( 'sfwppa_options', $sfwppa_options );
+}
+
+/**
+ * Get Settings From Option Page
+ * Handles to return all settings value
+ * 
+ * @since 1.0.0
+*/
 function sfwppa_get_settings() {
 
 	$options = get_option('sfwppa_options');
@@ -43,30 +61,41 @@ function sfwppa_get_settings() {
 	return $settings;
 }
 
-// Get an option
-// Looks to see if the specified setting exists, returns default if not
+/**
+ * Get an option
+ * Looks to see if the specified setting exists, returns default if not
+ * 
+ * @since 1.0.0
+ */
 function sfwppa_get_option( $key = '', $default = false ) {
-	
+
 	global $sfwppa_options;
 
-	$value = ! empty( $sfwppa_options[ $key ] ) ? $sfwppa_options[ $key ] : $default;
+	$default_setting = sfwppa_get_default_settings();
+
+	if( ! isset( $sfwppa_options[ $key ] ) && isset( $default_setting[ $key ] ) && ! $default ) {
+		$value = $default_setting[ $key ];
+	} else {
+		$value = ! empty( $sfwppa_options[ $key ] ) ? $sfwppa_options[ $key ] : $default;
+	}
+
 	$value = apply_filters( 'sfwppa_get_option', $value, $key, $default );
+
 	return apply_filters( 'sfwppa_get_option_' . $key, $value, $key, $default );
 }
 
 /**
  * Function template  designs
  * 
- * @package Styles For WP Pagenavi Addon
  * @since 1.0
  */
 function sfwppa_menu_popup_layout() {
 	$menu_arr = array(
-		'style-1'	=> __('Style 1', 'Styles For WP Pagenavi Addon'),
-		'style-2'	=> __('Style 2', 'Styles For WP Pagenavi Addon'),
-		'style-3' 	=> __('Style 3', 'Styles For WP Pagenavi Addon'),
-		'style-4' 	=> __('Style 4', 'Styles For WP Pagenavi Addon'),
-		'style-5' 	=> __('Style 5', 'Styles For WP Pagenavi Addon'),
+					'style-1'		=> __('Style 1', 'Styles For WP Pagenavi Addon'),
+					'style-2'		=> __('Style 2', 'Styles For WP Pagenavi Addon'),
+					'style-3'		=> __('Style 3', 'Styles For WP Pagenavi Addon'),
+					'style-4'		=> __('Style 4', 'Styles For WP Pagenavi Addon'),
+					'style-5'		=> __('Style 5', 'Styles For WP Pagenavi Addon'),
 	);
 	return apply_filters('sfwppa_menu_popup_layout', $menu_arr );
 }
@@ -74,10 +103,8 @@ function sfwppa_menu_popup_layout() {
 /**
  * Function to get plugin image sizes array
  * 
- * @package Styles For WP Pagenavi Addon
  * @since 1.0
  */
-
 // Simple Usage - 1 callback per filter
 add_filter('wp_pagenavi_class_previouspostslink', 'sfwppa_pagination_previouspostslink_class');
 add_filter('wp_pagenavi_class_nextpostslink', 'sfwppa_pagination_nextpostslink_class');

@@ -1,9 +1,9 @@
 === Styles For WP Pagenavi Addon - Better design for post pagination ===
-Contributors: wponlinesupport, anoopranawat 
-Tags: post navigation, navigation, pagination, paging, pages, pagenavi style, wp pagenavi styling, pagenavi styling, pagenavi css,   
+Contributors: wponlinesupport, anoopranawat, patelketan
+Tags: post navigation, navigation, pagination, pagenavi style, wp pagenavi styling
 Requires at least: 3.1
-Tested up to: 6.0
-Stable tag: trunk
+Tested up to: 6.7.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,6 +38,9 @@ To Use this plugin you must have [Wp Pagenavi](https://wordpress.org/plugins/wp-
 
 
 == Changelog ==
+
+= 1.2.2 (23, January 2025) =
+* [*] Check compatibility to WordPress version 6.7.1
 
 = 1.2.1 (14, Feb 2022) =
 * [*] Tested up to: 5.9

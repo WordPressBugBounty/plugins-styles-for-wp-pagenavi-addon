@@ -32,7 +32,6 @@ class Sfwppa_Script {
 	/**
 	 * Function to add style at front side
 	 * 
-	 * @package Styles For WP Pagenavi Addon
 	 * @since 1.0.0
 	 */
 	function sfwppa_front_style() {		
@@ -45,7 +44,6 @@ class Sfwppa_Script {
 	/**
 	 * Function to add script at back side
 	 * 
-	 * @package search-and-navigation-popup
 	 * @since 1.0.0
 	 */
 	function sanpop_pro_admin_style($hook){
@@ -64,7 +62,7 @@ class Sfwppa_Script {
 			}
 
 			// Registring admin script
-			wp_register_style( 'wpspw-pro-admin-css', SFWPPA_URL.'assets/css/sfwppa-setting-admin.css', null, SFWPPA_VERSION );
+			wp_register_style( 'wpspw-pro-admin-css', SFWPPA_URL.'assets/css/sfwppa-setting-admin.css', array(), SFWPPA_VERSION );
 
 			wp_enqueue_style( 'wpspw-pro-admin-css' );
 		}
@@ -74,7 +72,6 @@ class Sfwppa_Script {
 	/**
 	 * Function to add script at admin side
 	 * 
-	 * @package Styles For WP Pagenavi Addon
 	 * @since 1.0.0
 	 */
 	function sfwppa_admin_script( $hook ) {
@@ -108,7 +105,6 @@ class Sfwppa_Script {
 	/**
 	 * Add custom css to head
 	 * 
-	 * @package Styles For WP Pagenavi Addon
 	 * @since 1.0.0
 	 */
 	function sfwppa_add_custom_css() {
@@ -259,13 +255,11 @@ class Sfwppa_Script {
 		
 		';
 		}
-		
-		if( !empty($custom_css) ) {
-			$css  = '<style type="text/css">' . "\n";
-			$css .= $custom_css;
-			$css .= "\n" . '</style>' . "\n";
 
-			echo $css;
+		if( ! empty( $custom_css ) ) {
+			echo '<style type="text/css">' . "\n" .
+					wp_strip_all_tags( $custom_css )
+				. "\n" . '</style>' . "\n";
 		}
 	}
 }

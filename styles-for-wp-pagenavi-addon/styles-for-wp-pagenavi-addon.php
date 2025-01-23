@@ -6,7 +6,7 @@
  * Domain Path: /languages/
  * Description: Adds a more styling options to Wp-PageNavi WordPress plugin OR  the_posts_pagination(); WordPress navigation function
  * Author: WP OnlineSupport, Essential Plugin
- * Version: 1.2.1
+ * Version: 1.2.2
  * Author URI: https://www.essentialplugin.com/wordpress-plugin/styles-wp-pagenavi-addon/
  *
  * @package WordPress
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if( ! defined('SFWPPA_VERSION') ) {
-    define( 'SFWPPA_VERSION', '1.2.1' ); // Plugin version
+    define( 'SFWPPA_VERSION', '1.2.2' ); // Plugin version
 }
 if( ! defined( 'SFWPPA_VERSION_DIR' ) ) {
     define( 'SFWPPA_VERSION_DIR', dirname( __FILE__ ) ); // Plugin dir
@@ -31,9 +31,56 @@ if(!defined( 'SFWPPA_SITE_LINK' ) ) {
 }
 
 function sfwppa_load_textdomain() {
-	load_plugin_textdomain( 'styles-for-wp-pagenavi-addon', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
+
+	global $wp_version;
+
+	// Set filter for plugin's languages directory
+	$sfwppa_lang_dir = dirname( plugin_basename( __FILE__ ) ) . '/languages/';
+	$sfwppa_lang_dir = apply_filters( 'sfwppa_languages_directory', $sfwppa_lang_dir );
+
+	// Traditional WordPress plugin locale filter.
+	$get_locale = get_locale();
+
+	if ( $wp_version >= 4.7 ) {
+		$get_locale = get_user_locale();
+	}
+
+	// Traditional WordPress plugin locale filter
+	$locale = apply_filters( 'plugin_locale',  $get_locale, 'styles-for-wp-pagenavi-addon' );
+	$mofile = sprintf( '%1$s-%2$s.mo', 'styles-for-wp-pagenavi-addon', $locale );
+
+	// Setup paths to current locale file
+	$mofile_global  = WP_LANG_DIR . '/plugins/' . basename( SFWPPA_VERSION_DIR ) . '/' . $mofile;
+
+	if ( file_exists( $mofile_global ) ) { // Look in global /wp-content/languages/plugin-name folder
+		load_textdomain( 'styles-for-wp-pagenavi-addon', $mofile_global );
+	} else { // Load the default language files
+		load_plugin_textdomain( 'styles-for-wp-pagenavi-addon', false, $sfwppa_lang_dir );
+	}
 }
-add_action('plugins_loaded', 'sfwppa_load_textdomain'); 
+add_action('init', 'sfwppa_load_textdomain'); 
+
+/**
+ * Activation Hook
+ * 
+ * Register plugin activation hook.
+ * 
+ * @since 1.0.0
+ */
+register_activation_hook( __FILE__, 'sfwppa_ticker_install' );
+
+/**
+ * Plugin Activation Function
+ * Does the initial setup, sets the default values for the plugin options
+ * 
+ * @since 1.0.0
+ */
+function sfwppa_ticker_install() {
+	
+	// IMP to call to generate new rules
+	flush_rewrite_rules();
+
+}
 
 global $sfwppa_options;
 
