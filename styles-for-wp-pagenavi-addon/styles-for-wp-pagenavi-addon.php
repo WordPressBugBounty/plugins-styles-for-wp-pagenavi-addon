@@ -5,12 +5,12 @@
  * Text Domain: styles-for-wp-pagenavi-addon
  * Domain Path: /languages/
  * Description: Adds a more styling options to Wp-PageNavi WordPress plugin OR  the_posts_pagination(); WordPress navigation function
- * Author: WP OnlineSupport, Essential Plugin
- * Version: 1.2.2
+ * Author: Essential Plugin
+ * Version: 1.2.3
  * Author URI: https://www.essentialplugin.com/wordpress-plugin/styles-wp-pagenavi-addon/
  *
- * @package WordPress
- * @author WP OnlineSupport
+ * @package Styles For WP Pagenavi Addon
+ * @author Essential Plugin
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if( ! defined('SFWPPA_VERSION') ) {
-    define( 'SFWPPA_VERSION', '1.2.2' ); // Plugin version
+    define( 'SFWPPA_VERSION', '1.2.3' ); // Plugin version
 }
 if( ! defined( 'SFWPPA_VERSION_DIR' ) ) {
     define( 'SFWPPA_VERSION_DIR', dirname( __FILE__ ) ); // Plugin dir
